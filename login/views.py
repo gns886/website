@@ -15,8 +15,8 @@ def RegisterAction(request):
     print(request.POST["username"])
     print(request.POST["login_password"])
     print(request.POST["confirm_password"])
-    print(Users.objects.filter(username_text=request.POST["username"]).count())
-    print(Users.objects.filter(username_text=request.POST["username"]).exists())
+    print(Users.objects.filter(username=request.POST["username"]).count())
+    print(Users.objects.filter(username=request.POST["username"]).exists())
     if not request.POST["username"].strip():
         context = '用户名不能为空'
     elif not request.POST["login_password"].strip():
@@ -25,12 +25,12 @@ def RegisterAction(request):
         context = '验证密码不能为空'
     elif request.POST["login_password"] != request.POST['confirm_password']:
         context = '验证密码与密码不符'
-    elif Users.objects.filter(username_text=request.POST["username"]).count()!=0:
+    elif Users.objects.filter(username=request.POST["username"]).count()!=0:
         context = '用户名重复'
     else:
-        Users.objects.create(username_text=request.POST["username"],
-                             password_text=request.POST["login_password"],
-                             authority_int=1)
+        Users.objects.create(username=request.POST["username"],
+                             password=request.POST["login_password"],
+                             authority=1)
         return(1)
     messages.success(request, context)
     return(0)
@@ -69,8 +69,8 @@ def LoginView(request):
             redirect('../')
         else:
             print('hoho')
-            film=Users.objects.filter(username_text=request.POST["username"],
-                                      password_text=request.POST["password1"])
+            film=Users.objects.filter(username=request.POST["username"],
+                                      password=request.POST["password1"])
             if film.exists():
                 return HttpResponse("进入主页面")
             else:

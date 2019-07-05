@@ -1,10 +1,15 @@
 from django.db import models
-from django.utils import timezone
-import datetime
+from defectManage.models import Module,Data
 # Create your models here.
 
 # Create your models here.
 class Users(models.Model):
-    username_text  = models.CharField(max_length=100)
-    password_text  = models.CharField(max_length=100)
-    authority_int  = models.IntegerField()
+    username   = models.CharField(max_length=100)
+    password   = models.CharField(max_length=100)
+    authority  = models.IntegerField()
+    module     = models.ManyToManyField(Module, on_delete=models.CASCADE,null=True)
+    tel_number = models.CharField(max_length=20)
+    address    = models.CharField(max_length=100)
+    def __str__(self):
+        return self.username
+
