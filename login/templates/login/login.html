@@ -7,7 +7,7 @@
 </head>
 <body>
     <form id="form1" action="{% url 'login:login' %}" method="post">
-         {% csrf_token %}
+        {% csrf_token %}
         <div style="width:500px;float: right;margin:0 auto;" >
             <label for="username" style="font-size:18px" >用户名：</label>
             <div style="height:35px;width:400px;position:relative;display:inline" >   <!--相关位置--> <!--此处为相关位置与绝对位置联合使用-->
