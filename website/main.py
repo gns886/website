@@ -1,7 +1,6 @@
 #import Django
 import datetime
 import psycopg2
-import global_parameters
 def getCurrentTime():
     now = datetime.datetime.now()
     time = str(now.year) + "-" + str(now.month) + "-" + str(now.day) + "/" + str(now.hour) + "." + str(now.minute) + "." + str(now.second)

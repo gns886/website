@@ -1,0 +1,92 @@
+
+/******** datagrid全局修改  ********/
+/**** @author wxs  ****/
+/**** @date 2016-06 ****/
+
+/**datagrid操作公共类**/
+.datagrid-operation{
+	height: 25px;
+    width: 30px;
+    display: inline-block;
+}
+
+/**留言**/
+.datagrid-reply{
+	background: url(../../../themes/2018-skin/2018-img/datagrid-reply.png) center center no-repeat;
+}
+/**编辑**/
+.datagrid-edit{
+	background: url(../../../themes/2018-skin/2018-img/datagrid-edit.png) center center no-repeat;
+}
+/**重置密码**/
+.datagrid-resetuserpass{
+	background: url(../../../themes/2018-skin/2018-img/datagrid-resetuserpass.png) center center no-repeat;
+}
+/**可见范围配置**/
+.datagrid-setvisiable{
+	background: url(../../../themes/2018-skin/2018-img/datagrid-setvisiable.png) center center no-repeat;
+}
+
+
+
+/**datagrid表格样式**/
+.mini-checkcolumn{
+	padding: 5px 0px !important;
+}
+
+.mini-grid-headerCell{
+	background-color: #EEE;
+}
+
+.mini-grid-headerCell-outer{
+	padding: 5px 0px;
+}
+
+.mini-grid-headerCell-inner{
+	line-height: 30px;
+	color: #333;
+}
+
+.mini-grid-cell {
+	padding: 5px 10px;
+}
+
+.mini-grid-cell-nowrap a {
+    line-height: 25px;
+    color: #3E50B4 !important;
+}
+
+.mini-grid-cell-inner{
+	padding:0px;
+	border:0px;
+	color: #333;
+}
+
+.rowcolor {
+    background: none;
+}
+
+html body  .mini-grid-row-selected{
+	background: #F5F5F5;
+}
+
+html body  .mini-grid-row-hover{
+	background: #F5F5F5;
+}
+
+.mini-pager {
+    height: 40px;
+}
+
+.mini-pager-left {
+    line-height: 40px;
+    height: 40px;
+}
+
+.mini-pager-right {
+    line-height: 40px;
+}
+
+.mini-grid-headerCell, .mini-grid-topRightCell {
+    background: #EEE;
+}

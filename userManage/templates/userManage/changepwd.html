@@ -1,0 +1,54 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+{% load static %}
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>修改密码</title>
+<link rel="stylesheet" type="text/css" href="{% static 'userManage/css.css' %}" />
+<script type="text/javascript" src="{% static 'userManage/jquery.min.js' %}"></script>
+</head>
+<body>
+	<div id="pageAll">
+		<div class="pageTop">
+			<div class="page">
+				<img src="{% static 'userManage/coin02.png' %}" /><span><a href="#">首页</a>&nbsp;-&nbsp;<a
+					href="#">账号管理</a>&nbsp;-</span>&nbsp;修改密码
+			</div>
+		</div>
+		<div class="page ">
+			<!-- 修改密码页面样式 -->
+            <form action="{% url 'userManage:changePWD' %}" method="POST">
+                {% csrf_token %}
+			<div class="bacen">
+				<div class="bbD">&nbsp;&nbsp;&nbsp;&nbsp;用户ID：&nbsp;&nbsp;&nbsp;&nbsp;001</div>
+				<div class="bbD">&nbsp;&nbsp;&nbsp;&nbsp;用户名：&nbsp;&nbsp;&nbsp;&nbsp;admin</div>
+				<div class="bbD">&nbsp;&nbsp;&nbsp;&nbsp;输入旧密码：
+                    <input type="password" class="input3" id="pwd1" name="password"/>
+                    <img class="imga" src="{% static 'userManage/ok.png' %}" />
+                    <img class="imgb" src="{% static 'userManage/no.png' %}" />
+				</div>
+				<div class="bbD">&nbsp;&nbsp;&nbsp;&nbsp;输入新密码：
+                    <input type="password" class="input3" id="pwd2" name="new_password"/>
+                    <img class="imga" src="{% static 'userManage/ok.png' %}" />
+                    <img class="imgb" src="{% static 'userManage/no.png' %}" />
+				</div>
+				<div class="bbD">&nbsp;再次确认密码：
+                    <input type="password" class="input3" id="pwd3" name="confirm_password"/>
+                    <img class="imga" src="{% static 'userManage/ok.png' %}" />
+                    <img class="imgb" src="{% static 'userManage/no.png' %}" />
+				</div>
+				<div class="bbD">
+					<p class="bbDP">
+                        <input type="submit">
+						<button class="btn_ok btn_yes">提交</button>
+						<a class="btn_ok btn_no" href="#">取消</a>
+					</p>
+				</div>
+			</div>
+            </form>
+{{ err_msg }}
+			<!-- 修改密码页面样式end -->
+		</div>
+	</div>
+</body>
+</html>

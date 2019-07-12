@@ -17,8 +17,8 @@ from django.contrib import admin
 from django.urls import path,include
 
 urlpatterns = [
-    path('defectManage', include('defectManage.urls')),
-    path('polls/', include('polls.urls')),
-    path('login/', include('login.urls')),
+   # path('login/', include('login.urls')),
     path('admin/', admin.site.urls),
+    path('userManage/',include('userManage.urls')),
+    path('polls/',include('polls.urls')),
 ]

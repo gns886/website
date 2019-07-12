@@ -1,0 +1,52 @@
+.mini-portal-table
+{	
+	background:#F5F5F5;
+    text-align:left;
+    display:table;
+    width:100%;
+    height:100%;
+    
+}
+.mini-portal-column
+{
+    vertical-align:top;    
+    
+    padding-right:10px;
+}
+.mini-portal-panel
+{
+    
+    margin-bottom:10px;
+}
+.mini-portal-panel .mini-panel-header
+{
+    cursor:move;
+}
+.mini-portal-panel .mini-panel-border
+{
+    background:white;
+}
+
+.mini-portal-proxy
+{   
+    overflow:hidden;
+    background:gray;
+    opacity: .15;-moz-opacity: .15;filter: alpha(opacity=15);
+    width:100%;
+    margin-bottom:10px;
+}
+.portal-photo{
+    overflow: hidden;
+    width: 34px;
+    height: 34px;
+    border-radius:50%;
+    position: relative;
+    margin: 5px;
+}			
+.portal-photo img{
+	display: none;
+    position: absolute;
+    left: 50%;
+    margin-left: -17px;
+    width: 34px;
+}	

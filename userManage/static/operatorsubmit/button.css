@@ -1,0 +1,14 @@
+/******** 按钮样式修改 ********/
+/**** @author wxs  ****/
+/**** @date 2016-06 ****/
+
+.button-blue{
+	padding:0px 15px;
+	background-color:#005BAC;
+	color:#FFF;
+	line-height:30px;
+	border-radius: 3.125px;
+	text-align: center;
+	display: inline-block;
+}
+

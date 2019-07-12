@@ -1,0 +1,28 @@
+
+/******** 弹窗样式修改 ********/
+/**** @author wxs  ****/
+/**** @date 2018-05 ****/
+
+.mini-window .mini-panel-header {
+    background: #007aff;
+}
+
+.mini-window .mini-panel-title {
+    color: #FFF;
+}
+
+.mini-tools-close {
+    background:url(../../../themes/2018-skin/2018-img/icon-portal-x-white.png) center center no-repeat;
+}
+
+.mini-panel .mini-panel-icon {
+    display: none !important;
+}
+
+/******** 弹窗遮罩透明度 ********/
+.mini-modal.mini-modal{
+	opacity: .6;
+    -moz-opacity: .6;
+    filter: alpha(opacity=60);
+}
+

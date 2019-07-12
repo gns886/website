@@ -1,0 +1,433 @@
+.mini-tabs-bodys {
+	margin-top: 0px !important;
+	padding: 0px !important;
+}
+.mini-tabs-scrollCt {
+    border: 0 !important;
+    background: none !important;
+}
+.form-title-hide .mini-tabs-headers{
+	display: none;
+}
+.header {
+	background: #fff !important;
+	padding: 8px 15px !important; 
+	/* box-shadow: 0 2px 4px rgba(20,20,20,0.15); */
+	color: #777;
+	margin-bottom: 5px;
+	border-radius: 3.125px;
+}
+.title-btn-box  {
+	height: 30px;
+	padding-left: 5px; 
+}
+.title-btn-box table {
+	font-size: 14px;
+	line-height: 30px;
+	width: 100%;
+}
+.title-btn-box .header-button {
+    width: 325px; 
+    text-align: right;
+}
+.info-box {
+	padding-left: 5px; 
+}
+.info-box-table  {
+	font-size: 14px;
+	line-height: 29px;
+	width: 100%;
+}
+.item-title {
+	width: 85px;
+	vertical-align: top;
+}
+.info-box-table a:hover {
+	text-decoration: underline !important;
+}
+.header-button a {
+	height: 30px;
+	word-spacing: 120px;
+	text-align: center;
+	color: #FFF;
+	cursor: pointer;
+	line-height: 30px;
+	display: inline-block;
+	padding: 0px 15px;
+	font-size: 14px;
+	border-radius: 3.125px;
+	margin: 0 2px;
+}
+#sendBtn {
+	background-color: #2487c8;
+}
+#chartBtn {
+	background-color: #5e8846;
+}
+
+.header-icon-box {
+	width: 30px;
+	height: 30px;
+}
+
+.header-icon-box img {
+	width: 30px;
+	height: 30px;
+}
+
+/** miniui 表单样式修改  **/
+.header .mini-textbox,.header .mini-buttonedit {
+	float: left;
+	margin: 2px 8px 2px 0;
+	min-height: 26px;
+}
+
+.header .mini-buttonedit {
+	margin: 2px 0;
+}
+
+.header .mini-buttonedit-border {
+	min-height: 24px;
+	-webkit-border-radius: 3.125px;
+	border-radius: 3.125px;
+}
+
+.header .mini-textbox-border {
+	min-height: 24px;
+	-webkit-border-radius: 3.125px;
+	border-radius: 3.125px;
+}
+
+.header .mini-textbox-input,.header .mini-buttonedit-input{
+	min-height: 24px;
+	line-height: 24px;
+	font-family: Microsoft Yahei;
+	font-size: 16px;
+}
+
+.header .mini-buttonedit-buttons {
+	margin: 0px;
+	right: 5px;
+	top: 2px;
+}
+
+
+/* 修改miniui表单样式 */
+.mini-required .mini-textbox-border {
+	background: #fff !important;
+}
+
+.mini-textbox-border {
+	border: 1px solid transparent !important;
+}
+
+.mini-textbox-border:hover {
+	border: 1px solid #cfcfcf !important; 
+}
+
+.header .mini-textbox-input {
+	text-align: center;
+}
+
+.mini-toolbar {
+	border-top: 1px solid #2487c8 !important;
+	border-radius: 0;
+}
+
+/* 工具条按钮样式 */
+.click-btn-box {
+	float: left;
+	width: 34px;
+	height: 30px;
+	margin: 0 8px;
+	cursor: pointer;
+	position: relative;
+}
+
+.click-btn {
+	width: 34px;
+	height: 30px;
+}
+
+.click-btn-icon,
+.click-btn-arrow {
+	display: block;
+	float: left;
+}
+
+.click-btn-icon {
+	width: 22px;
+	height: 22px;
+	padding: 4px 0;
+}
+
+.click-btn-arrow {
+	width: 8px;
+	height: 8px;
+	padding: 11px 2px;
+}
+
+.click-btn-icon img {
+	display: block;
+	width: 22px;
+	height: 22px;
+}
+
+.click-btn-arrow img {
+	display: block;
+	width: 8px;
+	height: 8px;
+}
+
+.active img {
+	-webkit-transform: rotate(180deg);
+	-ms-transform: rotate(180deg);
+	-o-transform: rotate(180deg);
+	transform: rotate(180deg);
+}
+
+.slidemenu {
+	min-width: 300px;
+	padding: 5px 10px;
+	background: #fff;
+	border-radius: 5px;
+	position: absolute;
+	left: -10px;
+	top: 46px;
+	z-index: 999;
+	-webkit-box-shadow: 0 0 2px 2px rgba( 0, 0, 0, .1);
+	box-shadow: 0 0 2px 2px rgba( 0, 0, 0, .1);
+	/* display: none; */
+}
+
+.triangle {
+	position: absolute;
+	left: 16px;
+	top: -8px;
+	border-left: 8px solid transparent;
+	border-right: 8px solid transparent;
+	border-bottom: 8px solid #fff;
+}
+
+.copy-to label {
+	width: 15%;
+	float: left;
+}
+
+.backlog label {
+	width: 25%;
+	float: left;
+}
+
+/* 按钮样式重写 */
+.line {
+	display: inline-block;
+    width: 1px;
+    height: 20px;
+    background: #cfcfcf;
+    margin-left: 5px;
+    position: relative;
+    top: 5px;
+}
+
+#temporaryBtn,
+#print,
+#annexBtn,
+#addCooperBtn {
+	width: 30px;
+	height: 30px;
+	word-spacing: 30px;
+	padding: 0;
+	position: relative;
+	-webkit-transition: all ease 0.3s;
+	-o-transition: all ease 0.3s;
+	transition: all ease 0.3s;
+}
+
+#temporaryBtn .img,
+#print .img,
+#annexBtn .img,
+#addCooperBtn .img {
+	width: 20px;
+	height: 20px;
+	position: relative;
+	top: 5px;
+}
+
+#copy-to .btn-tip,
+#backlog .btn-tip,
+#temporaryBtn .btn-tip,
+#print .btn-tip,
+#annexBtn .btn-tip,
+#addCooperBtn .btn-tip {
+	display: none;
+	height: 24px;
+	padding:  0 10px;
+	border-radius: 3.125px;
+	background: #000;
+	text-align: center;
+	line-height: 24px;
+	font-size: 14px;
+	color: #fff;
+	position: absolute;
+	right: -17px;
+	top: 40px;
+	z-index: 999;
+	opacity: 0.6;
+	filter:alpha(opacity=60);
+	white-space: nowrap;
+	word-spacing: normal;
+}
+
+.tip-triangle {
+	display: block;
+	border-left: 5px solid transparent;
+	border-right: 5px solid transparent;
+	border-bottom: 5px solid #000;
+	position: absolute;
+	right: 25px;
+	top: -5px;
+	opacity: 0.6;
+	filter:alpha(opacity=60); 
+}
+
+#temporaryBtn:hover,
+#print:hover,
+#annexBtn:hover,
+#addCooperBtn:hover {
+	background: #fff;
+}
+
+#copy-to:hover .btn-tip,
+#backlog:hover .btn-tip,
+#temporaryBtn:hover .btn-tip,
+#print:hover .btn-tip,
+#annexBtn:hover .btn-tip,
+#addCooperBtn:hover .btn-tip {
+	display: block;
+	opacity: 0.6;
+	filter:alpha(opacity=60); 
+	-webkit-transition: all ease 3s;
+	-o-transition: all ease 3s;
+	transition: all ease 3s;
+}
+
+/* 修改miniui选项卡样式 */
+.mini-fit #mainTabs .mini-tabs-headers {
+	height: 36px !important;
+}
+
+.mini-fit .mini-tabs-plain .mini-tabs-scrollCt {
+	background: #fff;
+}
+
+.mini-tabs-space {
+	border-bottom: none !important;
+}
+
+.mini-tab {
+	 background: none !important;
+	border: 1px solid transparent !important;
+	padding: 0 10px !important; 
+}
+
+.mini-tab span{
+	display: block;
+	height: 31px;
+	line-height: 31px;
+	border-bottom: 2px solid transparent;
+	font-size: 14px;
+	color: #666;
+}
+
+.mini-tab-active {
+	background: none !important;
+	border-bottom: 2px solid #2487c8 !important;
+}
+
+.mini-tab-active .mini-tab-text {
+	font-weight: bold;
+}
+
+.mini-tabs-space2 {
+	border-bottom: none !important;
+}
+
+.mini-tabs-space2 div {
+	width: 15px !important;
+	height: 18px !important;
+	background: none;
+	position: relative;	
+}
+
+.mini-tabs-space2 div:after {
+	content: "";
+	display: block;
+	width: 1px;
+	height: 18px;
+	background: #cfcfcf;
+	position: absolute;
+	left: 7px;
+	top: 0px;
+}
+
+/* 弹窗 */
+.mask-layer {
+	width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 9998;
+    background: #555;
+    opacity: 0.6;
+    filter:alpha(opacity=60);
+    display: none;
+}
+
+.popup-window {
+	width: 300px;
+	height: 128px;
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	z-index: 9999;
+	margin-left: -150px;
+	margin-top: -64px;
+	background: #000;
+	opacity: 0.9;
+	filter:alpha(opacity=90);
+	border-radius: 5px;
+	display: none;
+}
+
+.popup-window .icon-box {
+	width: 47px;
+	height: 47px;
+	margin: 24px auto 0;
+	border-radius: 50%;
+	border: 3px solid #fff;
+}
+
+.popup-window .icon-box img {
+	width: 47px;
+	height: 47px;
+}
+
+.popup-window p {
+	margin: 10px 0;
+	text-align: center;
+	font-size: 16px;
+	color: #fff;
+}
+
+/* 流程发起页微信浏览器样式 */
+@media screen and (max-width: 800px) {
+	.header-button {
+		width: 300px !important;
+	}
+
+	.title-btn-box td span.mini-textbox {
+		max-width: 265px;
+	}
+}
