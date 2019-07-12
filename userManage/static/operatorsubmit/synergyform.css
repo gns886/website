@@ -1,0 +1,197 @@
+/**** 引用公共CSS ****/
+@import url("form-font.css");
+
+/**** 修复查看表单时，文字靠上显示的问题  ****/
+/* .mini-textbox {
+	display: inherit !important;
+} */
+td .mini-grid-table {
+	float: left;
+	border-collapse: collapse;
+}
+
+.smart-form-label .mini-textbox-border,.smart-form-label .mini-textbox-input,.smart-form-label .mini-buttonedit-border,.smart-form-label .mini-buttonedit-textarea,.smart-form-label .mini-buttonedit-input,.smart-form-label .mini-textboxlist-border
+	{
+	border: 0;
+	background: none;
+	cursor: default;
+}
+
+.smart-form-label .mini-buttonedit-button,.smart-form-label .mini-textboxlist-close
+	{
+	display: none;
+}
+
+.showTableLine {
+	border-collapse: collapse;
+}
+
+.showTableLine tr td {
+	border: 1px solid black;
+}
+
+.mini-textbox {
+	height: 26px;
+}
+
+.mini-textbox-input {
+	height: 24px;
+	line-height: 24px;
+}
+
+.mini-textbox-border {
+	height: 24px;
+}
+
+/* .mini-textbox {
+	height: 76px;
+} */
+.mini-buttonedit-input {
+	height: 24px !important;
+	line-height: 24px !important;
+}
+
+.mini-buttonedit-border {
+	height: 24px !important;
+}
+
+.mini-buttonedit-textarea {
+	height: 100% !important;
+}
+
+.mini-required .mini-textbox-input {
+	height: 100% !important;
+	background: #ffffe8;
+}
+
+.mini-buttonedit {
+	height: 26px !important;
+}
+
+.mini-buttonedit-buttons {
+	margin-top: 2px;
+}
+
+.adaptive {
+	height: 100% !important;
+}
+
+.adaptive .mini-textbox-border {
+	height: 100% !important;
+	border: 0 !important;
+}
+
+.adaptive .mini-textbox-input {
+	height: 100% !important;
+}
+
+.adaptive .mini-buttonedit-border {
+	height: 100% !important;
+	border: 0 !important;
+}
+
+.adaptive .mini-buttonedit-input {
+	height: 100% !important;
+}
+
+.adaptive .mini-buttonedit-buttons {
+	position: absolute;
+	top: 50%;
+	margin-top: -9.5px !important;
+}
+
+.adaptive table {
+	height: 100% !important;
+}
+
+.adaptive table {
+	height: 100% !important;
+}
+
+/** 防止复选框组和单选框组显示出边框而加  **/
+.mini-radiobuttonlist td {
+	border: none !important;
+}
+
+.mini-checkboxlist td {
+	border: none !important;
+}
+
+/** 让复选框组和单选框组居中显示  **/
+.mini-radiobuttonlist {
+	display: inline-block;
+	position: relative;
+	top: 3px;
+}
+
+.mini-checkboxlist {
+	display: inline-block;
+}
+
+/** 表单中增加mini-grid控件，去掉grid空间对应的边框  **/
+.mini-grid-filterCell,.mini-grid-summaryCell
+	{
+	border: 0 !important;
+	border-right: #ddd 1px solid !important;
+	border-bottom: #ddd 1px solid !important;
+}
+/* 
+.mini-grid-headerCell,.showTableLine .mini-grid-cell{
+	border: none !important;
+	border-right: 1px solid #000 !important;
+	border-bottom: 1px solid #000 !important;
+} 
+*/
+.mini-grid-filterCell,.mini-grid-summaryCell
+	{
+	/*border: 0 !important; 2018.12.27 修复高级表单下表单多行表头分隔线不显示的问题 5435*/
+}
+
+.myRow ._annexDeleteButton {
+	display: none;
+}
+
+/*.mini-buttonedit-button,.mini-buttonedit-close {
+	margin-top: -2px !important;
+}*/
+
+.mini-coordinate {
+	background: url(../../images/flow/icon-flow-zuobiao.png) no-repeat 0px 0px;
+	padding: 1px 0px 1px 18px;
+	color: blue;
+	text-decoration: none;
+}
+
+.mini-link {
+	background: url(../../images/flow/icon-flow-link.png) no-repeat 0px 0px;
+	padding: 1px 0px 1px 18px;
+	color: blue;
+	text-decoration: none;
+}
+
+.annex td {
+	border: 0 !important;
+}
+
+.upload-zz{
+	position: absolute;
+    left: 50%;
+    top: 0;
+    z-index: 998;
+    display: block;
+    cursor: pointer;
+    background: rgb(0, 0, 0, .5);
+}
+
+.upload-icon{
+	position: absolute;
+    left: 50%;
+    top: 50%;
+    z-index: 999;
+    display: block;
+    cursor: pointer;
+}
+
+.upload-icon img {
+	width:100%
+}
