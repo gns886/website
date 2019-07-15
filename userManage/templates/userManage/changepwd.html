@@ -20,8 +20,8 @@
             <form action="{% url 'userManage:changePWD' %}" method="POST">
                 {% csrf_token %}
 			<div class="bacen">
-				<div class="bbD">&nbsp;&nbsp;&nbsp;&nbsp;用户ID：&nbsp;&nbsp;&nbsp;&nbsp;001</div>
-				<div class="bbD">&nbsp;&nbsp;&nbsp;&nbsp;用户名：&nbsp;&nbsp;&nbsp;&nbsp;admin</div>
+				<div class="bbD">&nbsp;&nbsp;&nbsp;&nbsp;用户ID：&nbsp;&nbsp;&nbsp;&nbsp;{{ username }}</div>
+				<div class="bbD">&nbsp;&nbsp;&nbsp;&nbsp;姓&nbsp;&nbsp;&nbsp;&nbsp;名：&nbsp;&nbsp;&nbsp;&nbsp;{{ name }}</div>
 				<div class="bbD">&nbsp;&nbsp;&nbsp;&nbsp;输入旧密码：
                     <input type="password" class="input3" id="pwd1" name="password"/>
                     <img class="imga" src="{% static 'userManage/ok.png' %}" />
@@ -39,7 +39,6 @@
 				</div>
 				<div class="bbD">
 					<p class="bbDP">
-                        <input type="submit">
 						<button class="btn_ok btn_yes">提交</button>
 						<a class="btn_ok btn_no" href="#">取消</a>
 					</p>

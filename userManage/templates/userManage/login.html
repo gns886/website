@@ -45,6 +45,11 @@
 	<!-- 登录页面底部end -->
 
 {% if err_msg %}
+    <script>
+        alert('{{ err_msg }}');
+    </script>
+{% endif %}
+{% if err_msg %}
     <dialog id="showDialog">
         <div>您没有权限访问本页面！</div>
     </dialog>
@@ -58,9 +63,3 @@
 </html>
 
 
-<script type="text/javascript">
-    function error(err_msg)
-    {
-        alert(err_msg)
-    }
-</script>

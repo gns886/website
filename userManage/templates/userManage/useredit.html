@@ -23,26 +23,17 @@
 <body>
 <form action="{% url 'userManage:useredit' %}" method="POST">
     {% csrf_token %}
+     <div class="pageTop">
+			<div class="page">
+				<img src="{% static 'userManage/coin02.png' %}" />
+                <span><a href="../">首页</a>&nbsp;-&nbsp;-管理员设置&nbsp;-&nbsp;-</span>&nbsp;人事调度
+			</div>
+		</div>
 <!-- Popup -->
 <div id="Popup">
 
 <!-- SubPopup -->
 <div id="SubPopup">
-<script type="text/javascript">
-$(function(){
-$(".select").each(function(){
-var s=$(this);
-var z=parseInt(s.css("z-index"));
-var dt=$(this).children("dt");
-var dd=$(this).children("dd");
-var _show=function(){dd.slideDown(200);dt.addClass("cur");s.css("z-index",z+1);};
-var _hide=function(){dd.slideUp(200);dt.removeClass("cur");s.css("z-index",z);};
-dt.click(function(){dd.is(":hidden")?_show():_hide();});
-dd.find("a").click(function(){dt.html($(this).html());_hide();});
-$("body").click(function(i){ !$(i.target).parents(".select").first().is(s) ? _hide():"";});})})
-
-
-</script>
 
     <div class="form_boxC">
     <p>"<span class="f_cB">*</span>"号为必填项目</p>
@@ -51,57 +42,54 @@ $("body").click(function(i){ !$(i.target).parents(".select").first().is(s) ? _hi
         <tr>
             <th>员工姓名 <span class="f_cB">*</span></th>
             <td><div class="txtbox floatL" style="width:100px;">
-                <input name="name" type="text" size="5" value="张三">
+                <input name="name" type="text" size="5" value={{ name }}>
                 </div>
             </td>
         </tr>
         <tr>
             <th>负责模块 <span class="f_cB">*</span></th>
             <td><!-- selectbox -->
-            <div class="selectbox" style="width:230px;">
-                <dl class="select">
-                <dt>销售员1</dt>
-                <dd><ul>
-                <li><a href="#">销售A</a></li>
-                <li><a href="#">销售B</a></li>
-                <li><a href="#">销售C</a></li>
-                <li><a href="#">销售D</a></li>
-                <li><a href="#">销售E</a></li>
-                </ul></dd></dl>
+
+            <div class="selectbox" style="width:230px">
+                <select class="select" name="module" >
+                    {% for module in module_list %}
+                    <option>{{ module.name }}</option>
+                    {% endfor %}
+                </select>
             </div>
             <!-- /selectbox --></td>
         </tr>
         <tr>
             <th>性别 <span class="f_cB">*</span></th>
             <td><!-- selectbox -->
-            <div class="selectbox" style="width:230px;">
-                <dl class="select">
-                <dt>请选择</dt>
-                <dd><ul>
-                <li><a href="#"> 男 </a></li>
-                <li><a href="#"> 女 </a></li>
-                </ul></dd></dl>
+            <div class="selectbox" style="width:230px">
+                <select class="select" name="sex" >
+                    <option>男</option>
+                    <option>女</option>
+                </select>
             </div>
             <!-- /selectbox --></td>
         </tr>
 
         <tr>
-            <th>联系方式 <span class="f_cB"></span></th>
+            <th>电话号码 <span class="f_cB"></span></th>
             <td><div class="txtbox floatL">
-                <input name="tel_number" type="text" value="zhangsan@qq.com">
+                <input name="tel_number" type="text" value={{ tel_number }}>
             </div></td>
         </tr>
         <tr>
             <th>E-Mail <span class="f_cB"></span></th>
             <td><div class="txtbox floatL">
-                <input name="E_mail" type="text" value="zhangsan@qq.com">
+                <input name="E_mail" type="text" value={{ E_mail }}>
             </div></td>
         </tr>
         <tr>
         <th>备注</th>
         <td><div class="txtbox">
-            <textarea name="note" cols="25" rows="5"></textarea>
-            </div><p class="f_cB pdg_t5">最多500字</p></td>
+            <textarea name="note" cols="25" rows="5" placeholder="最多500字">{% if note %}{{ note }}{% endif %}</textarea>
+           <p class="f_cB pdg_t5">
+           </p>
+            </div></td>
         </tr>
     </table>
 

@@ -1,0 +1,177 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+{% load static %}
+<html xmlns="http://www.w3.org/1999/xhtml" manifest="/EIP/resources/components/flowchart/preview.appcache"><head>
+  <title>本科生假期去向登记</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta http-equiv="pragma" content="no-cache">
+  <meta http-equiv="cache-control" content="no-cache">
+  <meta http-equiv="expires" content="0">
+  <link rel="stylesheet" type="text/css" href={% static 'operatorsubmit/miniui.css' %}>
+  <link rel="stylesheet" type="text/css" href={% static 'operatorsubmit/icons.css' %}>
+  <link rel="stylesheet" type="text/css" href={% static 'operatorsubmit/global.css' %}>
+  <link rel="stylesheet" type="text/css" href={% static 'operatorsubmit/portal.css' %}>
+  <link rel="stylesheet" type="text/css" href={% static 'operatorsubmit/skin.css' %}>
+  <link rel="stylesheet" type="text/css" href={% static 'operatorsubmit/popup.css' %}>
+  <link rel="stylesheet" type="text/css" href={% static 'operatorsubmit/datagrid.css' %}>
+  <link rel="stylesheet" type="text/css" href={% static 'operatorsubmit/button.css' %}>
+  <link rel="stylesheet" type="text/css" href={% static 'operatorsubmit/synergyform.css' %}>
+  <style type="">.mini-grid-table{float: left;}p {margin: 5px 0;}td p {margin: 0;}</style>
+ <body style="background: #e8e8e8;">
+<div id="form" style="overflow: hidden;">
+<input type="hidden" class="mini-hidden" name="id">
+  <div id="complex" class="mini-complex" style="background: rgb(255, 255, 255); margin: 12px auto; padding: 10px 5px; width: 620px; height: 520px; text-align: center; position: relative;">
+  <form action="{% url 'userManage:detailevent' event.id %}" method="POST">
+      {% csrf_token %}
+
+   <p><span style="text-align: center; font-family: &quot;Microsoft YaHei&quot;; font-size: 24px; background-color: rgb(255, 255, 255);">本科生假期去向登记</span></p>
+   <p style="text-align: left;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+   <p><span style="font-size: 24px;"></span></p>
+   <p><br></p>
+   <table style="border: 2px solid black; border-image: none; border-collapse: collapse;" data-sort="sortDisabled" class=" showTableLine" align="center">
+    <tbody>
+     <tr>
+      <td style="border-color: rgb(38, 38, 38); background-color: rgb(153, 204, 255);" rowspan="1" colspan="1" width="9" valign="middle" height="27" align="center">
+          <span style="font-family: 微软雅黑, &quot;Microsoft YaHei&quot;; font-size: 14px;">事件名称</span>
+      </td>
+      <td style="border-color: rgb(38, 38, 38); word-break: break-all;" rowspan="1" colspan="5" width="488" valign="middle" height="27" align="center">
+          <span class="mini-textbox adaptive MicrosoftYaHei fourteen control-mini-textbox mini-required" style="border-width: 0px; width: 100%; padding: 0px;" id="JTZZ">
+              <span class="mini-textbox-border">
+                  <center> {{ event.name_text }} </center>
+              </span>
+              <input type="hidden">
+          </span>
+      </td>
+     </tr>
+     <tr>
+
+    <td style="border-color: rgb(38, 38, 38); background-color: rgb(153, 204, 255); word-break: break-all;" rowspan="1" colspan="1" width="70" valign="middle" height="27" align="center">
+        <span style="font-family: 微软雅黑, &quot;Microsoft YaHei&quot;; font-size: 14px;">所属模块
+        </span>
+    </td>
+    <td style="border-color: rgb(38, 38, 38); -ms-word-break: break-all;" rowspan="1" colspan="1" width="70" valign="middle" align="left">
+          <span class="mini-textbox adaptive MicrosoftYaHei fourteen control-mini-textbox mini-textbox-readOnly" style="border-width: 0px; width: 100%; padding: 0px;" id="NF">
+              <span class="mini-textbox-border">
+              </span>
+              <center> {{ event.module }} </center>
+          </span>
+
+    </td>
+    <td style="border-color: rgb(38, 38, 38); background-color: rgb(153, 204, 255); word-break: break-all;" rowspan="1" colspan="1" width="70" valign="middle" height="27" align="center">
+        <span style="font-family: 微软雅黑, &quot;Microsoft YaHei&quot;; font-size: 14px;">事件状态
+        </span>
+    </td>
+    <td style="border-color: rgb(38, 38, 38); -ms-word-break: break-all;" rowspan="1" colspan="1" width="105" valign="middle" align="left">
+          <span class="mini-textbox adaptive MicrosoftYaHei fourteen control-mini-textbox mini-textbox-readOnly" style="border-width: 0px; width: 100%; padding: 0px;" id="NF">
+              <span class="mini-textbox-border">
+              </span>
+              <center>{{ event.detail_state }}</center>
+          </span>
+    </td>
+    <td style="border-color: rgb(38, 38, 38); background-color: rgb(153, 204, 255); word-break: break-all;" rowspan="1" colspan="1" width="70" valign="middle" height="27" align="center">
+        <span style="font-family: 微软雅黑, &quot;Microsoft YaHei&quot;; font-size: 14px;">优先级
+        </span>
+    </td>
+    <td style="border-color: rgb(38, 38, 38); -ms-word-break: break-all;" rowspan="1" colspan="1" width="40" valign="middle" align="left">
+          <span class="mini-textbox adaptive MicrosoftYaHei fourteen control-mini-textbox mini-textbox-readOnly" style="border-width: 0px; width: 100%; padding: 0px;" id="NF">
+              <span class="mini-textbox-border">
+              </span>
+              <center>{{ event.priority }}</center>
+          </span>
+    </td>
+      </tr>
+
+
+    <tr>
+    <td style="border-color: rgb(38, 38, 38); background-color: rgb(153, 204, 255); word-break: break-all;" rowspan="1" colspan="1" width="70" valign="middle" height="27" align="center">
+        <span style="font-family: 微软雅黑, &quot;Microsoft YaHei&quot;; font-size: 14px;">处理人
+        </span>
+    </td>
+    <td style="border-color: rgb(38, 38, 38); -ms-word-break: break-all;" rowspan="1" colspan="1" width="70" valign="middle" align="left">
+          <span class="mini-textbox adaptive MicrosoftYaHei fourteen control-mini-textbox mini-textbox-readOnly" style="border-width: 0px; width: 100%; padding: 0px;" id="NF">
+              <span class="mini-textbox-border">
+              </span>
+              <center> {{ event.operator.name }} </center>
+          </span>
+
+    </td>
+    <td style="border-color: rgb(38, 38, 38); background-color: rgb(153, 204, 255); word-break: break-all;" rowspan="1" colspan="1" width="70" valign="middle" height="27" align="center">
+        <span style="font-family: 微软雅黑, &quot;Microsoft YaHei&quot;; font-size: 14px;">处理人电话
+        </span>
+    </td>
+    <td style="border-color: rgb(38, 38, 38); -ms-word-break: break-all;" rowspan="1" colspan="1" width="105" valign="middle" align="left">
+          <span class="mini-textbox adaptive MicrosoftYaHei fourteen control-mini-textbox mini-textbox-readOnly" style="border-width: 0px; width: 100%; padding: 0px;" id="NF">
+              <span class="mini-textbox-border">
+              </span>
+              <center>{{ event.operator.tel_number }}</center>
+          </span>
+    </td>
+    <td style="border-color: rgb(38, 38, 38); background-color: rgb(153, 204, 255); word-break: break-all;" rowspan="1" colspan="1" width="70" valign="middle" height="27" align="center">
+        <span style="font-family: 微软雅黑, &quot;Microsoft YaHei&quot;; font-size: 14px;">判断结果
+        </span>
+    </td>
+    <td style="border-color: rgb(38, 38, 38); -ms-word-break: break-all;" rowspan="1" colspan="1" width="40" valign="middle" align="left">
+          <span class="mini-textbox adaptive MicrosoftYaHei fourteen control-mini-textbox mini-textbox-readOnly" style="border-width: 0px; width: 100%; padding: 0px;" id="NF">
+              <span class="mini-textbox-border">
+              </span>
+              <center>{{ event.judge }}</center>
+          </span>
+    </td>
+    </tr>
+        <tr>
+    <td style="border-color: rgb(38, 38, 38); background-color: rgb(153, 204, 255); word-break: break-all;" rowspan="1" colspan="1" width="70" valign="middle" height="27" align="center">
+        <span style="font-family: 微软雅黑, &quot;Microsoft YaHei&quot;; font-size: 14px;">测试人
+        </span>
+    </td>
+    <td style="border-color: rgb(38, 38, 38); -ms-word-break: break-all;" rowspan="1" colspan="1" width="70" valign="middle" align="left">
+          <span class="mini-textbox adaptive MicrosoftYaHei fourteen control-mini-textbox mini-textbox-readOnly" style="border-width: 0px; width: 100%; padding: 0px;" id="NF">
+              <span class="mini-textbox-border">
+              </span>
+              <center> {{ event.inspector.name }} </center>
+          </span>
+
+    </td>
+    <td style="border-color: rgb(38, 38, 38); background-color: rgb(153, 204, 255); word-break: break-all;" rowspan="1" colspan="1" width="70" valign="middle" height="27" align="center">
+        <span style="font-family: 微软雅黑, &quot;Microsoft YaHei&quot;; font-size: 14px;">测试人电话
+        </span>
+    </td>
+    <td style="border-color: rgb(38, 38, 38); -ms-word-break: break-all;" rowspan="1" colspan="1" width="105" valign="middle" align="left">
+          <span class="mini-textbox adaptive MicrosoftYaHei fourteen control-mini-textbox mini-textbox-readOnly" style="border-width: 0px; width: 100%; padding: 0px;" id="NF">
+              <span class="mini-textbox-border">
+              </span>
+              <center>{{ event.inspector.tel_number }}</center>
+          </span>
+    </td>
+    <td style="border-color: rgb(38, 38, 38); background-color: rgb(153, 204, 255); word-break: break-all;" rowspan="1" colspan="1" width="70" valign="middle" height="27" align="center">
+        <span style="font-family: 微软雅黑, &quot;Microsoft YaHei&quot;; font-size: 14px;">测试结果
+        </span>
+    </td>
+    <td style="border-color: rgb(38, 38, 38); -ms-word-break: break-all;" rowspan="1" colspan="1" width="40" valign="middle" align="left">
+          <span class="mini-textbox adaptive MicrosoftYaHei fourteen control-mini-textbox mini-textbox-readOnly" style="border-width: 0px; width: 100%; padding: 0px;" id="NF">
+              <span class="mini-textbox-border">
+              </span>
+              <center>{{ event.result }}</center>
+          </span>
+    </td>
+    </tr>
+
+
+     <tr>
+      <td style="border-color: rgb(38, 38, 38); background-color: rgb(153, 204, 255); word-break: break-all;" rowspan="1" colspan="1" width="85" valign="middle" height="27" align="center"><span style="font-family: 微软雅黑, &quot;Microsoft YaHei&quot;; font-size: 14px;">备&nbsp; &nbsp; &nbsp; &nbsp;注</span></td>
+      <td style="border-color: rgb(38, 38, 38);" rowspan="1" colspan="5" width="488" valign="middle" height="260" align="center"><span class="mini-textbox mini-textarea adaptive MicrosoftYaHei fourteen control-mini-textarea" style="border-width: 0px; width: 100%; height: 100%; padding: 0px;" id="BZ"><span class="mini-textbox-border">
+          <textarea class="mini-textbox-input" autocomplete="off" placeholder="" id="BZ$text" name="BZ" maxlength="200" style="height: 25px;">
+              处理结果：{{ event.deal_info }}
+              ---------------------------------------------------------
+              测试结果：{{ event.test_info }}
+          </textarea></span><input type="hidden"></span></td>
+     </tr>
+    </tbody>
+   </table>
+  <br>
+   <input type="submit" name="submit" value="删除">
+   <input type="submit" name="submit" value="返回">
+    </form>
+  </div>
+
+ </div>
+
+</body></html>

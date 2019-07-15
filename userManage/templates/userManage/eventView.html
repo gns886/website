@@ -49,15 +49,24 @@
 <h2>事件查询</h2>
 <table cellpadding="0" cellspacing="0">
     <tr>
-        <th>Id</th>
-        <th>事件名</th>
-        <th>模块</th>
-        <th>优先级</th>
-        <th>操作员</th>
-        <th>审核员</th>
-        <th>最近操作时间</th>
-        <th>发布时间</th>
-        <th>状态</th>
+        <th>{% if order == 'id' %}<a href = {% url 'userManage:eventView' page '-id' %}>ID</a>
+            {% else %}<a href = {% url 'userManage:eventView' page 'id' %}>ID</a>{% endif %}</th>
+        <th>{% if order == 'name_text' %}<a href = {% url 'userManage:eventView' page '-name_text' %}>事件名</a>
+            {% else %}<a href = {% url 'userManage:eventView' page 'name_text' %}>事件名</a>{% endif %}</th>
+        <th>{% if order == 'module' %}<a href = {% url 'userManage:eventView' page '-module' %}>模块</a>
+            {% else %}<a href = {% url 'userManage:eventView' page 'module' %}>模块</a>{% endif %}</th>
+        <th>{% if order == 'priority' %}<a href = {% url 'userManage:eventView' page '-priority' %}>优先级</a>
+            {% else %}<a href = {% url 'userManage:eventView' page 'priority' %}>优先级</a>{% endif %}</th>
+        <th>{% if order == 'operator' %}<a href = {% url 'userManage:eventView' page '-operator' %}>操作员</a>
+            {% else %}<a href = {% url 'userManage:eventView' page 'operator' %}>操作员</a>{% endif %}</th>
+        <th>{% if order == 'inspector' %}<a href = {% url 'userManage:eventView' page '-inspector' %}>审核员</a>
+            {% else %}<a href = {% url 'userManage:eventView' page 'inspector' %}>审核员</a>{% endif %}</th>
+        <th>{% if order == 'deal_date' %}<a href = {% url 'userManage:eventView' page '-deal_date' %}>最近处理时间</a>
+            {% else %}<a href = {% url 'userManage:eventView' page 'deal_date' %}>最近处理时间</a>{% endif %}</th>
+        <th>{% if order == 'pub_date' %}<a href = {% url 'userManage:eventView' page '-pub_date' %}>发布时间</a>
+            {% else %}<a href = {% url 'userManage:eventView' page 'pub_date' %}>发布时间</a>{% endif %}</th>
+        <th>{% if order == 'detail_state' %}<a href = {% url 'userManage:eventView' page '-detail_state' %}>状态</a>
+            {% else %}<a href = {% url 'userManage:eventView' page 'detail_state' %}>状态</a>{% endif %}</th>
         <th>操作</th>
     </tr>
     {{ event }}
@@ -65,67 +74,38 @@
     <tr>
         <td>{{ event.id }}</td>
         <td>{{ event.name_text }}</td>
+        <td>{{ event.module.name }}</td>
         <td>{{ event.priority }}</td>
-        <td>{{ event.operator_name }}</td>
-        <td>{{ event.inspector_name }}</td>
+        <td>{{ event.operator.name }}</td>
+        <td>{{ event.inspector.name }}</td>
         <td>{{ event.deal_date }}</td>
         <td>{{ event.pub_date }}</td>
-        <td>{{ event.state }}</td>
-        <td>&nbsp;</td>
-        <td class="last"><a href="#">驳回</a></td>
+        <td>{{ event.detail_state }}</td>
+        <td class="last"><a href="{% url 'userManage:detailevent' event.id %}">详细</a></td>
     </tr>
     {% endfor %}
 </table>
-<p class="msg">共找到{{ message_all }}条年度预算记录，当前显示从第{{ message_from }}条至第{{ message_to }}条</p>
+<p class="msg">共找到{{ message_all }}条缺陷事件记录，当前显示从第{{ message_from }}条至第{{ message_to }}条</p>
 </div>
 </div>
 <!-- /MainForm -->
-
-
-<!-- BtmMain -->
-<div id="BtmMain">
-<span class="ttl">全部审批</span>
-
-<!-- txtbox -->
-<div class="txtbox floatL mag_r20">
-<span class="sttl">审核时间：</span>
-<input name="" type="text" size="8">
-</div>
-<!-- /txtbox -->
-
-<!-- txtbox -->
-<div class="txtbox floatL mag_r20">
-<span class="sttl">审核人：</span>
-<input name="" type="text" size="8">
-</div>
-<!-- /txtbox -->
-
-<!-- btn_box -->
-<div class="btn_box floatR mag_l20"><input name="" type="button" value="返回列表" onMouseMove="this.className='input_move'" onMouseOut="this.className='input_out'"></div>
-<!-- /btn_box -->
-
-<!-- btn_box -->
-<div class="btn_box floatR mag_l20"><input name="" type="button" value="驳回" onMouseMove="this.className='input_move'" onMouseOut="this.className='input_out'"></div>
-<!-- /btn_box -->
-
-<!-- btn_box -->
-<div class="btn_box floatR mag_l20"><input name="" type="button" value="通过" onMouseMove="this.className='input_move'" onMouseOut="this.className='input_out'"></div>
-<!-- /btn_box -->
-</div>
 <!-- /BtmMain -->
 
 <!-- PageNum -->
 <ul id="PageNum">
-<li><a href="#">首页</a></li>
-<li><a href="#">上一页</a></li>
-<li><a href="#">1</a></li>
-<li><a href="#">2</a></li>
-<li><a href="#">3</a></li>
-<li><a href="#">4</a></li>
-<li><a href="#">5</a></li>
-<li><a href="#">6</a></li>
-<li><a href="#">下一页</a></li>
-<li><a href="#">尾页</a></li>
+<li><a href="{% url 'userManage:eventView' 1 order %}">首页</a></li>
+<li><a href="{% url 'userManage:eventView' page|add:-1 order %}">上一页</a></li>
+<li><a href="{% url 'userManage:eventView' 1 order %}">1</a></li>
+<li><a href="{% url 'userManage:eventView' 2 order %}">2</a></li>
+<li><a href="{% url 'userManage:eventView' 3 order %}">3</a></li>
+<li><a href="{% url 'userManage:eventView' 4 order %}">4</a></li>
+<li><a href="{% url 'userManage:eventView' 5 order %}">5</a></li>
+<li><a href="{% url 'userManage:eventView' 6 order %}">6</a></li>
+<li><a href="{% url 'userManage:eventView' 7 order %}">7</a></li>
+<li><a href="{% url 'userManage:eventView' 8 order %}">8</a></li>
+<li><a href="{% url 'userManage:eventView' 9 order %}">9</a></li>
+<li><a href="{% url 'userManage:eventView' page|add:1 order %}">下一页</a></li>
+<li><a href="{% url 'userManage:eventView' 100 order %}">尾页</a></li>
 </ul>
 <!-- /PageNum -->
 </div>

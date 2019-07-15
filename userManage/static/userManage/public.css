@@ -24,7 +24,7 @@ li {
 
 .head {
 	width: 100%;
-	height: 80px;
+	height:90px;
 	background-color: #4390b9;
 }
 
@@ -37,7 +37,7 @@ li {
 }
 
 .head .headL img.headLogo {
-	padding-top: 1px;
+	padding-top: 10px;
 }
 
 .head .headR {

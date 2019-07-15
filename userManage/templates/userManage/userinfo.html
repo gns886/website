@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+<link rel="stylesheet" type="text/css" href="{% static 'userManage/css.css' %}" />
+</head>
+<body>
+<div id="pageAll">
+    <div class="pageTop">
+			<div class="page">
+				<img src="{% static 'userManage/coin02.png' %}" />
+                <span><a href="../">首页</a>&nbsp;-&nbsp;-账号管理&nbsp;-&nbsp;-</span>&nbsp;个人简介
+			</div>
+	</div>
+    工号：{{ user.username }}<br>
+    姓名：{{ user.name }}<br>
+    权限：{% if user.authority == 1 %}
+              管理员<br>
+          {% elif user.authority == 0 %}
+              游客<br>
+          {% elif user.authority == 2 %}
+              工作人员<br>
+          {% else %}
+              权限未知<br>
+          {% endif %}
+    负责模块：{{ user.module.name }}<br>
+    电话：{{ user.tel_number }}<br>
+    邮箱：{{ user.E_mail }}<br>
+    性别：{{ user.sex }}<br>
+    简介：{{ user.note }}<br>
+</div>
+</body>
+</html>
