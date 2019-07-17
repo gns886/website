@@ -2,9 +2,11 @@
 {% load static %}
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-<link rel="stylesheet" type="text/css" href="{% static 'userManage/css.css' %}" />
+    <title>个人简介</title>
+     <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="{% static 'userManage/css.css' %}" />
+    <meta http-equiv="content-type"content="text/html; charset=gb2312">
+
 </head>
 <body>
 <div id="pageAll">
@@ -14,22 +16,55 @@
                 <span><a href="../">首页</a>&nbsp;-&nbsp;-账号管理&nbsp;-&nbsp;-</span>&nbsp;个人简介
 			</div>
 	</div>
-    工号：{{ user.username }}<br>
-    姓名：{{ user.name }}<br>
-    权限：{% if user.authority == 1 %}
-              管理员<br>
-          {% elif user.authority == 0 %}
-              游客<br>
-          {% elif user.authority == 2 %}
-              工作人员<br>
-          {% else %}
-              权限未知<br>
-          {% endif %}
-    负责模块：{{ user.module.name }}<br>
-    电话：{{ user.tel_number }}<br>
-    邮箱：{{ user.E_mail }}<br>
-    性别：{{ user.sex }}<br>
-    简介：{{ user.note }}<br>
+
+
+
+    <table border=1; cellpadding=12; cellspacing=0; align=center>
+		<tr align=center>
+			<td style="height:40px" colspan="5">基本信息</td>
+		</tr>
+		<tr align=center>
+			<td style="width:80px;height:40px">姓名:</td>
+            <td style="width:120px;height:40px">{{ user.name }}</td>
+			<td style="width:80px;height:40px">性别:</td>
+            <td style="width:120px;height:40px">{{ user.sex }}</td>
+        <form action="{% url 'userManage:userinfo'%}" method='POST'>
+			<td style="width:150px;height:160px" rowspan="4">
+                <label class="ui_button ui_button_primary" for="xFile">上传文件</label>
+                {% if user.image %}
+                     <input type="file" style="width:96%;height:96%;background:{{ user.image }}" name="image" id="file" class="file" value=""  accept="jpg,jpeg,png,bmp" multiple/>
+                     {{ user.image }}
+                {% else %}
+                     <input type="file" style="width:96%;height:96%;background:white" name="image" id="file" class="file" value="eitu" accept="image/png, image/jpeg, image/gif, image/jpg" multiple/>
+
+                {% endif %}
+
+            </td>
+        </form>
+		</tr>
+		<tr align=center>
+			<td style="width:80px;height:40px">负责模块:</td><td>{{ user.module.name }}</td>
+			<td style="width:80px;height:40px">工号:</td>
+            <td>{{ user.username }}</td>
+		</tr>
+		<tr align=center>
+			<td style="width:80px;height:40px">手机号码:</td>
+            <td colspan="3">{{ user.tel_number }}</td>
+		</tr>
+		<tr align=center>
+			<td style="width:80px;height:40px">电子信箱:</td>
+            <td colspan="3">{{ user.E_mail }}</td>
+		</tr>
+
+
+		<tr align=center>
+			<td style="width:80px;height:40px" colspan="5">简介</td>
+		</tr>
+		<tr>
+			<td style="width:80px;height:200px" colspan="5" style="height:100px">{{ user.note }}</td>
+		</tr>
+	</table>
+
 </div>
 </body>
 </html>

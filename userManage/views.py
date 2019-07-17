@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.contrib import messages
 from django.db.models import Q
-from django.shortcuts import render,get_object_or_404,redirect
+from django.shortcuts import render,get_object_or_404,redirect,render_to_response
 from django.template import loader
 from django.http import HttpResponse
 from django.urls import reverse
@@ -18,15 +18,6 @@ from django.contrib import messages
 
 
 # Create your views here.
-class Cache:
-    user = Users(username='custom',password='custom',authority=0)
-    username = '1'
-    password = '1'
-    authority = 0                     #0:游客  1：管理员  2：员工
-
-
-def TestView(request):
-    return HttpResponse(Cache.authority)  #TODO 可以删
 
 
 
@@ -36,7 +27,13 @@ def LeftView(request):
     :param request:
     :return: {'authority':用户权限}
     '''
-    authority = Cache.authority
+
+    if 'user' in request.COOKIES.keys():
+        user_id = request.COOKIES['user']
+        user = Users.objects.get(id = user_id)
+        authority = user.authority
+    else:
+        authority = 0
     print(authority)
     return render(request, 'userManage/left.html', {'authority': authority})
 
@@ -48,14 +45,23 @@ def HeadView(request):
     :return:
     '''
     if request.method == 'GET':
-        if Cache.authority:
-            return render(request, 'userManage/head.html', {'name': Cache.username,
-                                                            'authority': Cache.authority, })
+        if 'user' in request.COOKIES.keys():
+            user_id = request.COOKIES['user']
+            user = Users.objects.get(id = user_id)
+            username = user.username
+            authority = user.authority
+            return render(request, 'userManage/head.html', {'name': username,
+                                                            'authority': authority, })
         else:
             return render(request, 'userManage/head2.html')
 
 def MainView(request):
-    return render(request,'userManage/main.html',{'authority' : Cache.authority})
+
+    if 'user' in request.COOKIES.keys():
+        authority = request.COOKIES['authority']
+    else:
+        authority = 0
+    return render(request,'userManage/main.html',{'authority' : authority})
 
 def IndexView(request):
     '''
@@ -63,9 +69,16 @@ def IndexView(request):
     :param request:
     :return: {'authority' : 用户权限}
     '''
+
+    if 'user' in request.COOKIES.keys():
+        user = request.COOKIES['user']
+        print('cookies中的内容为：',user)
+        authority = request.COOKIES['authority']
+    else:
+        authority = 0
     print(request.method)
-    return render(request, 'userManage/index.html', {'status' : Cache.authority,
-                                                         'authority' : Cache.authority})
+    return render(request, 'userManage/index.html', {'status' : authority,
+                                                         'authority' : authority})
 
 def LoginView(request):
     '''
@@ -75,7 +88,6 @@ def LoginView(request):
     :return: {'err_msg' : 错误信息  null=True}
     '''
     print(request.method)
-    Cache.authority = 0
     if request.method=='GET':
         return render(request,'userManage/login.html')
     elif request.method=='POST':
@@ -92,19 +104,20 @@ def LoginView(request):
                 err_msg = "用户不存在或密码错误"
             elif not (password==user[0].password):
                 err_msg = "用户不存在或密码错误"
+            elif (str(user[0].id) in request.session) and (request.session[str(user[0].id)]):
+                err_msg = '用户已登录'
             else:                                   #登陆成功
                 authority = user[0].authority
                 print(username)
                 print(password)
                 print(authority)
-                Cache.user = user[0]
-                Cache.password = password
-                Cache.username = username
-                Cache.authority = authority
-                #return render(request,'userManage/index.html',{'status' : 1,
-                #                                               'username' : username,
-                #                                               'authority' : authority,})
-                return redirect('userManage:index')
+                print('cookies内容为：')
+                print (user[0])
+                request.session[str(user[0].id)] = True
+                response = redirect('userManage:index')
+                response.set_cookie('user',user[0].id)
+                response.set_cookie('authority',user[0].authority)
+                return response
         return render(request,'userManage/login.html',{'err_msg' : err_msg})
 
 def MakeCut(page,message_all):
@@ -181,7 +194,9 @@ def MyEventView(request,pk,order):
     '''
     if request.method == 'GET':
         print('order_by:'+order)
-        event_list = Event.objects.filter(Q(state=0,operator=Cache.user)|Q(state=1,module=Cache.user.module))
+        user_id = request.COOKIES['user']
+        user = Users.objects.get(id=user_id)
+        event_list = Event.objects.filter(Q(state=0,operator=user)|Q(state=1,module=user.module))
         event_list = event_list.order_by(order)
         message_all = event_list.__len__()
         var = MakeCut(pk, message_all)
@@ -209,8 +224,15 @@ def LogoutView(request):
     :return: 
     '''
     #TODO
-    Cache.authority = 0
-    return redirect('userManage:index')
+    print('开始删除')
+    user_id = request.COOKIES['user']
+    request.session.clear()
+    response = redirect('userManage:head')
+    response.delete_cookie('authority')
+    response.delete_cookie('user')
+    #response.flush()
+    #return redirect('userManage:index')
+    return response
 
 def UserEditView(request):
     '''
@@ -232,7 +254,8 @@ def UserEditView(request):
     if request.method == 'GET':
         print('开始修改')
         module_list = Module.objects.all()
-        user = Cache.user
+        user_id = request.COOKIES['user']
+        user = Users.objects.get(id=user_id)
         return render(request,'userManage/useredit.html',{'module_list' : module_list,
                                                           'name' : user.name,
                                                           'sex' : user.sex,
@@ -243,7 +266,8 @@ def UserEditView(request):
     elif request.method == 'POST':
         print('点击了',request.POST.get('submit'))
         if request.POST.get('submit')=='提交':
-            user = Cache.user  # TODO
+            user_id = request.COOKIES['user']  # TODO
+            user = Users.objects.get(id = user_id)
             user.name = request.POST.get('name')
             user.E_mail = request.POST.get('E_mail')
             user.note = request.POST.get('note')
@@ -267,6 +291,7 @@ def UserEditView(request):
                 return redirect('userManage:main')
         else:
             print('点击了取消')
+            return redirect('userManage:main')
     else: return HttpResponse('?')
 
 def ChangePWDView(request):
@@ -279,8 +304,8 @@ def ChangePWDView(request):
               'username' : 工号
               'name' : 姓名}
     '''
-    print('密码为：')
-    print(Cache.password)
+    user_id = request.COOKIES['user']
+    user = Users.objects.get(id = user_id)
     if request.method == "POST":
         password = request.POST.get('password')
         new_password = request.POST.get('new_password')
@@ -288,27 +313,27 @@ def ChangePWDView(request):
         if (not password) or (not new_password) or (not confirm_password):
             err_msg = '输入信息不能为空'
         else:
-            if not(password == Cache.password):
+            if not(password == user.password):
                 err_msg = '密码错误'
-                print(Cache.password)
+                print(user.password)
                 print(password)
                 print(confirm_password)
                 print(new_password)
             elif not(new_password == confirm_password):
                 err_msg = '两次密码不同'
-            elif new_password == Cache.password:
+            elif new_password == user.password:
                 err_msg = '新密码与旧密码重复'
             else:                                #成功
-                user = Users.objects.get(username = Cache.user.username)        #TODO
+                user = Users.objects.get(username = user.username)        #TODO
                 user.password = new_password
                 user.save()
                 return render(request, 'userManage/main.html',)
         return render(request,'userManage/changepwd.html',{'err_msg' : err_msg,
-                                                           'username' : Cache.username,
-                                                           'name' : Cache.user.name})
+                                                           'username' : user.username,
+                                                           'name' : user.name})
     else:
-        return render(request,'userManage/changepwd.html',{'username' : Cache.user.username,
-                                                           'name' : Cache.user.name})
+        return render(request,'userManage/changepwd.html',{'username' : user.username,
+                                                           'name' : user.name})
 
 def OperateEventView(request,pk):
     '''
@@ -329,9 +354,9 @@ def OperateEventView(request,pk):
             event.state = 1
             event.detail_state = '待测试'
             event.save()
-            return redirect('userManage:myevent', 1,id)
+            return redirect('userManage:myevent', 1,'id')
         elif request.POST.get('submit') == '返回':
-            return redirect('userManage:myevent',1,'id')
+            return redirect('userManage:myevent', 1,'id')
         else: return HttpResponse('error')
     else: return HttpResponse('error')
 
@@ -349,9 +374,11 @@ def InspectEventView(request,pk):
         return render(request,'userManage/inspectevent.html',{'event' : event})
     elif request.method == 'POST':
         if request.POST.get('submit') == '提交':
+            user_id = request.COOKIES['user']
+            user = Users.objects.get(id = user_id)
             note = request.POST.get('note')
             event = Event.objects.get(id = pk)
-            event.inspector = Cache.user
+            event.inspector = user
             event.test_info = note
             event.deal_date = timezone.now()
             if request.POST.get('result') == 'REFUSE':
@@ -360,10 +387,10 @@ def InspectEventView(request,pk):
                 event.detail_state = '待处理'
             elif request.POST.get('result') == 'PASS':
                 event.result = '通过测试'
-                currentEvent = CurrentEvent.objects.get(event = event)
-                solvedEvent = SolvedEvent(event = event,foreign_id=event.id)
-                currentEvent.delete()
-                solvedEvent.save()
+                #currentEvent = CurrentEvent.objects.get(event = event)
+                #solvedEvent = SolvedEvent(event = event,foreign_id=event.id)
+                #currentEvent.delete()
+                #solvedEvent.save()         #TODO
                 event.state = 2
                 event.detail_state = '已完成'
             else: return render(request,'userManage/inspectevent.html',{'event' : event,
@@ -425,7 +452,17 @@ def UserInfoView(request):
     :param request:
     :return: {'user' : 用户}
     '''
-    return render(request,'userManage/userinfo.html',{'user' : Cache.user})
+    user_id = request.COOKIES['user']
+    user = Users.objects.get(id=user_id)
+    if request.method == 'GET':
+        return render(request,'userManage/userinfo.html',{'user' : user})
+    elif request.method=='POST':
+        print('改图片了')
+        user.image = request.POST.get('imgage')
+        user.save()
+        return render(request,'userManage/userinfo.html',{'user' : user})
+    else:return HttpResponse('error')
+
 
 def AssignView(request):
     '''
@@ -507,8 +544,8 @@ def AddEventView(request):
                               result='',
                               note=note)
                 event.save()
-                currentevent = CurrentEvent(event=event,foreign_id=event.id)
-                currentevent.save()
+                #currentevent = CurrentEvent(event=event,foreign_id=event.id)
+                #currentevent.save()
                 return redirect('../')
             return render(request, 'userManage/addevent.html', {'module_list': module_list,
                                                                     'worker_list': worker_list,
@@ -542,16 +579,19 @@ def ChangeModuleView(request):
 
 
 
-def DeleteWorker(reqeust,pk):
+def DeleteWorker(request,pk):
     '''
     删除用户
     :param reqeust:
     :param pk: 用户ID
     :return:
     '''
-    user = Users.objects.get(id = pk)
-    if (user.authority == 2) and (Cache.authority == 1):   #TODO
-        user.delete()
+    deletedUser = Users.objects.get(id = pk)
+    authority = request.COOKIES['authority']
+    print(authority)
+    print(deletedUser.authority)
+    if (deletedUser.authority == 2) and (authority == '1'):   #TODO
+        deletedUser.delete()
     return redirect('userManage:assign')
 
 def DeleteModule(request,pk):
@@ -561,8 +601,9 @@ def DeleteModule(request,pk):
     :param pk: 模块ID
     :return:
     '''
+    authority = request.COOKIES['authority']
     module = Module.objects.get(id = pk)
-    if (Cache.authority == 1):                    #TODO
+    if (authority == '1'):                    #TODO
         module.delete()
     return redirect('userManage:changemodule')
 
@@ -576,8 +617,10 @@ def EditModuleView(request,pk):
     :return:
     '''
     if request.method == 'GET':
+        user_id = request.COOKIES['user']
+        user = Users.objects.get(id = user_id)
         module = Module.objects.get(id = pk)
-        if (Cache.authority == 1):
+        if (user.authority == 1):
             return render(request,'userManage/editmodule.html',{'module' : module})
         else:
             return redirect('userManage:changemodule')
@@ -607,9 +650,28 @@ def DetailEventView(request,pk):
         return render(request, 'userManage/detailevent.html',{'event' : event})
 
     elif request.method == 'POST':
+        user_id = request.COOKIES['user']
+        user = Users.objects.get(id = user_id)
         if request.POST.get('submit') == '删除':
-            if Cache.authority == 1:
+            if user.authority == 1:
                 event = Event.objects.get(id = pk)
                 event.delete()
         return redirect('userManage:eventView',1,'id')
     else: return HttpResponse('error')
+
+
+
+def TestView(request):
+    if 'HTTP_X_FORWARDED_FOR' in request.META.keys():
+        ip = request.META['HTTP_X_FORWARDED_FOR']
+    else:
+        ip = request.META['REMOTE_ADDR']
+    cookies = request.COOKIES.get('user')
+    user = Users.objects.get(id = cookies)
+    authority = request.COOKIES.get('authority')
+    session = request.session.get(str(user.id))
+    return render(request,'userManage/test.html',{'cookies' : cookies,
+                                                  'session' : str(session),
+                                                  'user' : cookies,
+                                                  'authority' : authority,
+                                                  'ip' : ip})
